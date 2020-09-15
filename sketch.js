@@ -1,10 +1,21 @@
-var fixedRect, movingRect;
+var fixedRect, movingRect; 
+var gameObj1, gameObj2, gameobj3, gameobj4;
 function setup() {
   createCanvas(1200,800);
-  fixedRect = createSprite(200,200,50,80);
+  fixedRect = createSprite(100,500,50,80);
   fixedRect.shapeColor = "blue";
   movingRect = createSprite(400,200,80,30);
   movingRect.shapeColor = "blue";
+  gameObj1 = createSprite(100,200,50,50);
+  gameObj1.shapeColor = "blue";
+  gameObj2 = createSprite(200,200,50,50);
+  gameObj2.shapeColor = "blue";
+  gameobj3 = createSprite(300,600,50,50);
+  gameobj3.shapeColor = "pink";
+  // gameobj3.velocityY = -2;
+  gameobj4 = createSprite(400,400,50,50);
+  gameobj4.shapeColor = "pink";
+  // gameobj4.velocityY = +2;
  }
 
 function draw() {
@@ -15,18 +26,42 @@ function draw() {
   movingRect.x = World.mouseX;
   console.log(fixedRect.y-movingRect.y);
   //the if statement for getting it colored when the rectangles touch
-   if(fixedRect.x-movingRect.x < movingRect.width/2 + fixedRect.width/2
-     && movingRect.x - fixedRect.x< movingRect.width/2 + fixedRect.width/2
-     && fixedRect.y - movingRect.y < movingRect.height/2 + fixedRect.height/2
-     && movingRect.y - fixedRect.y < movingRect.height/2 + fixedRect.height/2)
+   if(isTouching(movingRect, gameObj2))
   { 
     //to make it yellow color when it touches 
-       fixedRect.shapeColor="yellow"; 
+       gameObj2.shapeColor="yellow"; 
        movingRect.shapeColor="yellow";
   }
   else{
     //to make it green when it doesnt touch 
-      fixedRect.shapeColor="green";
+      gameObj2.shapeColor="green";
       movingRect.shapeColor="green"; 
+  }
+}
+//   //funnction for bouce of 2 objects 
+//     if(gameobj3.x-gameobj4.x < gameobj4.width/2 + gameobj3.width/2
+//       && gameobj4.x - gameobj3.x< gameobj4.width/2 + gameobj3.width/2)
+//     { 
+//      gameobj3.velocityX = gameobj3.velocityX * (-1);
+//      gameobj4.velocityX = gameobj4.velocityX * (-1);
+//     }
+//     if(gameobj3.y - gameobj4.y < gameobj4.height/2 + gameobj3.height/2
+//       && gameobj4.y - gameobj3.y < gameobj4.height/2 + gameobj3.height/2) 
+//     {
+//     gameobj3.velocityY = gameobj3.velocityY * (-1);
+//     gameobj4.velocityY = gameobj4.velocityY * (-1);
+//     }
+
+function isTouching(object1, object2) {
+//the if statement for getting it colored when the rectangles touch
+  if(object2.x-object1.x < object1.width/2 + object2.width/2
+    && object1.x - object2.x< object1.width/2 + object2.width/2
+    && object2.y - object1.y < object1.height/2 + object2.height/2
+    && object1.y - object2.y < object1.height/2 + object2.height/2)
+  { 
+    return true;
+  }
+  else{
+    return false;
   }
 }
